@@ -180,6 +180,7 @@ button:active {
 
   .prize-list form input {
     width: 200px;
+    margin-bottom: 1rem;
   }
 }
 

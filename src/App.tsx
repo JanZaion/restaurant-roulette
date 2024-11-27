@@ -61,7 +61,7 @@ function App() {
               </div>
             ))}
           </div>
-          <div className="pointer">⯆</div>
+          <div className="pointer">V</div>
         </div>
       ) : (
         <div className="prize-list">
