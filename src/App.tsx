@@ -1,12 +1,30 @@
-import { useState } from 'react';
 import './App.css';
 import { prizes as initialPrizes } from './prizes';
+import { useState, useEffect } from 'react';
 
 function App() {
   const [spinning, setSpinning] = useState(false);
-  const [prizes, setPrizes] = useState<string[]>(initialPrizes);
+  const [prizes, setPrizes] = useState<string[]>([]);
   const [showWheel, setShowWheel] = useState(false);
   const [newPrize, setNewPrize] = useState('');
+
+  // Load prizes from URL params on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlPrizes = params.get('prizes');
+    if (urlPrizes) {
+      setPrizes(urlPrizes.split(','));
+    } else {
+      setPrizes(initialPrizes);
+    }
+  }, []);
+
+  // Update URL when prizes change
+  const updateUrlParams = (updatedPrizes: string[]) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('prizes', updatedPrizes.join(','));
+    window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
+  };
 
   const spinWheel = () => {
     setSpinning(true);
@@ -25,13 +43,17 @@ function App() {
   const addPrize = (e: React.FormEvent) => {
     e.preventDefault();
     if (newPrize.trim()) {
-      setPrizes([...prizes, newPrize.trim()]);
+      const updatedPrizes = [...prizes, newPrize.trim()];
+      setPrizes(updatedPrizes);
+      updateUrlParams(updatedPrizes);
       setNewPrize('');
     }
   };
 
   const deletePrize = (index: number) => {
-    setPrizes(prizes.filter((_, i) => i !== index));
+    const updatedPrizes = prizes.filter((_, i) => i !== index);
+    setPrizes(updatedPrizes);
+    updateUrlParams(updatedPrizes);
   };
 
   const toggleView = () => {
