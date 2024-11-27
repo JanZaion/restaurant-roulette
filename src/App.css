@@ -1,5 +1,5 @@
 body {
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   background: #333;
   text-align: center;
@@ -7,21 +7,29 @@ body {
   place-items: center;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: small;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1rem;
+  padding: 1rem;
+  padding-top: 2rem;
   overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .wheel-container {
   position: relative;
   width: 350px;
   height: 350px;
+  margin-top: 100px;
 }
 
 .wheel {
@@ -64,11 +72,27 @@ body {
 }
 
 .prize-list {
-  margin: 20px;
+  margin: 0px;
 }
 
 .prize-list form {
   margin-bottom: 20px;
+}
+
+.prize-list form input {
+  padding: 12px 15px;
+  border: 2px solid burlywood;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 250px;
+  transition: all 0.3s ease;
+  background: rgba(222, 184, 135, 0.1);
+}
+
+.prize-list form input:focus {
+  outline: none;
+  border-color: #d4a256;
+  box-shadow: 0 0 10px rgba(222, 184, 135, 0.3);
 }
 
 .prize-list ul {
@@ -84,4 +108,85 @@ body {
   margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: burlywood;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: #d4a256;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete button specific styling */
+.prize-list li button {
+  background: #ff9c9c;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.prize-list li button:hover {
+  background: #ff7070;
+}
+
+/* Add Prize button specific styling */
+.prize-list form button {
+  margin-left: 10px;
+  background: #d4a256;
+}
+
+.prize-list form button:hover {
+  background: burlywood;
+}
+
+/* Toggle view button specific styling */
+.container > button {
+  background: linear-gradient(45deg, burlywood, #d4a256);
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding: 12px 25px;
+}
+
+/* Add media queries */
+@media screen and (max-width: 480px) {
+  .wheel-container {
+    width: 300px;
+    height: 300px;
+    margin-top: 100px;
+  }
+
+  .container {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    padding-top: 2rem;
+  }
+
+  .prize-list form input {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .wheel-container {
+    width: 290px;
+    height: 290px;
+    margin-top: 100px;
+  }
 }
